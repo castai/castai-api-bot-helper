@@ -66,3 +66,6 @@ cloudshell_config.yml
 *.env
 !*.template.env
 *.zip
+
+# other
+ignore.*.*

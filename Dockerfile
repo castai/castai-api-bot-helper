@@ -1,6 +1,5 @@
 # Use the latest available version of libexpat
 FROM python:3.12.2-alpine
-#FROM python:3.11-alpine
 
 # Set the working directory
 WORKDIR /app

@@ -45,13 +45,29 @@ Next there are several steps to achieve your end-goal of a custom CAST.AI API co
    2) Set the `TEST_RUN` in [main.py](../castai-api-bot-helper/src/main.py) to True
 
 
+Green section below includes a more bare-boned approach - just create whatever script in any language you want.
+Reference the script as entrypoint in Dockerimage make sure to add the required variables as env_vars as in the example.
+
+
 ### Folder Structure - And files documentation
 
-castai-api-bot-helper\
+**castai-api-bot-helper**\
+<span style="color: green;">├── bare_bones \
+    │  ├── src \
+    │  │  └── script_example.py\
+    │  ├── helper_scripts \
+    │  │  ├── build-and-push.py\
+    │  │  ├── build-and-push.sh\
+    │  │  ├── constants.py\
+    │  │  ├── requirements.txt\
+    │  │  ├── secrets.env\
+    │  │  └── secrets.env.template\
+    │  ├── api-bot-helper_cronjob.yaml\
+    │  ├── api-bot-helper_pod.yaml\
+    │  └── Dockerfile</span>\
     ├── helper_scripts  
     │  ├── [build-and-push.py](#build-and-push.py)\
     │  ├── [constants.py](#constants.py)\
-    │  ├── [md_repo_structure_print.py](#md_repo_structure_print.py)\
     │  ├── [requirements.txt](#requirements.txt)\
     │  ├── [secrets.env](#secrets.env)\
     │  └── [secrets.env.template](#secrets.env.template)\
@@ -83,29 +99,28 @@ castai-api-bot-helper\
 |-------------|---------------------------------------------------------------------------------------------------------------------------|--------------------------------------------|
 | 1           | <a name="build-and-push.py"></a>build-and-push.py                                                                         | Creates docker image for the bot           |
 | 2           | <a name="constants.py"></a>constants.py                                                                                   | Constants like the image name/tag          |
-| 3           | <a name="md_repo_structure_print.py"></a>md_repo_structure_print.py                                                       | Created printout for README.md             |
-| 4           | <a name="requirements.txt"></a>requirements.txt                                                                           | requirements for helper scripts            |
-| 5           | <a name="secrets.env"></a>secrets.env                                                                                     | provides credentials for image registry    |
-| 6           | <a name="secrets.env.template"></a>secrets.env.template                                                                   | .template needs to be removed to get #6    |
-| 10          | <a name="example.py"></a>example.py                                                                                       | an example of a bot function               |
-| 12          | <a name="bot.py"></a>bot.py                                                                                               | Bot Class                                  |
-| 13          | <a name="bot_execution_config.py"></a>bot_execution_config.py                                                             | Bot Execution Configuration                |
-| 15          | <a name="api_requests_svc.py"></a>api_requests_svc.py                                                                     | Used to consume Cast.AI API                |
-| 16          | <a name="request_handle_svc.py"></a>request_handle_svc.py                                                                 | Actually handles the API request           |
-| 17          | <a name="constants.py"></a>constants.py                                                                                   | Bot high-level constants                   |
-| 18          | <a name="function_config.json"></a>function_config.json                                                                   | Used for local testing                     |
-| 19          | <a name="main.py"></a>main.py                                                                                             | Entry point (can be augmented for testing) |
-| 20          | <a name="requirements.txt"></a>requirements.txt                                                                           | Requirements.txt for Bot                   |
-| 21          | <a name="test_config.env"></a>test_config.env                                                                             | Used for testing (cluster_id/API_KEY)      |
-| 22          | <a name="test_config.env.template"></a>test_config.env.template                                                           | .template needs to be removed to get #21   |
-| 23          | <a name=".dockerignore"></a>.dockerignore                                                                                 | For building the image                     |
-| 24          | <a name=".gitignore"></a>.gitignore                                                                                       | Git ignore for repo                        |
-| 25          | <a name="api-bot-helper-function-config-example_configmap.yaml"></a>api-bot-helper-function-config-example_configmap.yaml | Bot ConfigMap example                      |
-| 26          | <a name="api-bot-helper_cronjob.yaml"></a>api-bot-helper_cronjob.yaml                                                     | Bot Cronjob example                        |
-| 27          | <a name="api-bot-helper_pod.yaml"></a>api-bot-helper_pod.yaml                                                             | Bot Pod example                            |
-| 28          | <a name="Dockerfile"></a>Dockerfile                                                                                       | Dockerfile for building the image          |
-| 29          | <a name="LICENSE.txt"></a>LICENSE.txt                                                                                     | License File                               |
-| 30          | <a name="README.md"></a>README.md                                                                                         | Repo README File                           |
+| 3           | <a name="requirements.txt"></a>requirements.txt                                                                           | requirements for helper scripts            |
+| 4           | <a name="secrets.env"></a>secrets.env                                                                                     | provides credentials for image registry    |
+| 5           | <a name="secrets.env.template"></a>secrets.env.template                                                                   | .template needs to be removed to get #4    |
+| 6           | <a name="example.py"></a>example.py                                                                                       | an example of a bot function               |
+| 7           | <a name="bot.py"></a>bot.py                                                                                               | Bot Class                                  |
+| 8           | <a name="bot_execution_config.py"></a>bot_execution_config.py                                                             | Bot Execution Configuration                |
+| 9           | <a name="api_requests_svc.py"></a>api_requests_svc.py                                                                     | Used to consume Cast.AI API                |
+| 10          | <a name="request_handle_svc.py"></a>request_handle_svc.py                                                                 | Actually handles the API request           |
+| 11          | <a name="constants.py"></a>constants.py                                                                                   | Bot high-level constants                   |
+| 12          | <a name="function_config.json"></a>function_config.json                                                                   | Used for local testing                     |
+| 13          | <a name="main.py"></a>main.py                                                                                             | Entry point (can be augmented for testing) |
+| 14          | <a name="requirements.txt"></a>requirements.txt                                                                           | Requirements.txt for Bot                   |
+| 15          | <a name="test_config.env"></a>test_config.env                                                                             | Used for testing (cluster_id/API_KEY)      |
+| 16          | <a name="test_config.env.template"></a>test_config.env.template                                                           | .template needs to be removed to get #15   |
+| 17          | <a name=".dockerignore"></a>.dockerignore                                                                                 | For building the image                     |
+| 18          | <a name=".gitignore"></a>.gitignore                                                                                       | Git ignore for repo                        |
+| 19          | <a name="api-bot-helper-function-config-example_configmap.yaml"></a>api-bot-helper-function-config-example_configmap.yaml | Bot ConfigMap example                      |
+| 20          | <a name="api-bot-helper_cronjob.yaml"></a>api-bot-helper_cronjob.yaml                                                     | Bot Cronjob example                        |
+| 21          | <a name="api-bot-helper_pod.yaml"></a>api-bot-helper_pod.yaml                                                             | Bot Pod example                            |
+| 22          | <a name="Dockerfile"></a>Dockerfile                                                                                       | Dockerfile for building the image          |
+| 23          | <a name="LICENSE.txt"></a>LICENSE.txt                                                                                     | License File                               |
+| 24          | <a name="README.md"></a>README.md                                                                                         | Repo README File                           |
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -119,5 +134,5 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[license-shield]: https://img.shields.io/github/license/castai/solutions-engineering-lab.svg?style=for-the-badge
-[license-url]: https://github.com/castai/solutions-engineering-lab/blob/main/castai-api-bot-helper/LICENSE.txt
+[license-shield]: https://img.shields.io/github/license/castai/castai-api-bot-helper.svg?style=for-the-badge
+[license-url]: https://github.com/castai/castai-api-bot-helper/blob/main/LICENSE.txt
